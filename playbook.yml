@@ -1,0 +1,53 @@
+- hosts: vm
+  vars:
+    main_user: "vagrant"
+  tasks:
+    - name: update and upgrade
+      apt:
+        update_cache: yes
+        upgrade: 'yes'
+      become: yes
+    - name: install via apt
+      apt:
+        pkg:
+        - ltrace
+        - strace
+        - vim
+        - gdb
+        - git
+        - file
+        - curl
+        - wget
+        - binutils
+        - libssl-dev
+        - build-essential
+        - netcat
+        - nasm
+        - python3
+        - python3-pip
+        - python3-dev
+        - ghex
+        - radare2
+        - docker.io
+      become: yes
+    - name: checksec
+      include_tasks: tasks/checksec.yml
+    - name: rp++
+      include_tasks: tasks/rp.yml
+    - name: Rust
+      shell: 
+        cmd: curl -sSf https://sh.rustup.rs | sh -s -- -y
+        creates: ~/.cargo
+    - name: mkdir ~/minicamp-tools/vscode
+      file:
+        path: ~/minicamp-tools/vscode
+        state: directory
+        mode: '0755'
+    - name: VSCode download
+      shell:
+        cmd: curl -L https://go.microsoft.com/fwlink/?LinkID=760868 -o ~/minicamp-tools/vscode/vscode.deb
+        creates: ~/minicamp-tools/vscode/vscode.deb
+    - name: VSCode install
+      apt:
+        deb: "/home/{{ main_user }}/minicamp-tools/vscode/vscode.deb"
+      become: yes

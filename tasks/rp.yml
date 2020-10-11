@@ -1,0 +1,22 @@
+- name: mkdir ~/minicamp-tools/rp
+  file:
+    path: ~/minicamp-tools/rp
+    state: directory
+    mode: '0755'
+- name: get file
+  get_url:
+    url: https://github.com/0vercl0k/rp/releases/download/v1/rp-lin-x64
+    dest: ~/minicamp-tools/rp/
+- name: chmod
+  file: 
+    path: ~/minicamp-tools/rp/rp-lin-x64
+    mode: u+x
+- name: cp
+  copy:
+    src: "/home/{{ main_user }}/minicamp-tools/rp/rp-lin-x64"
+    dest: /usr/local/bin/rp-lin-x64
+    remote_src: yes
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
+    mode: '0777'
+  become: yes

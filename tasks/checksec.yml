@@ -1,0 +1,22 @@
+- name: mkdir ~/minicamp-tools/checksec
+  file:
+    path: ~/minicamp-tools/checksec
+    state: directory
+    mode: '0755'
+- name: git clone repo
+  git:
+    repo: https://github.com/slimm609/checksec.sh.git
+    dest: ~/minicamp-tools/checksec
+- name: chmod
+  file: 
+    path: ~/minicamp-tools/checksec/checksec
+    mode: u+x
+- name: cp
+  copy:
+    src: "/home/{{ main_user }}/minicamp-tools/checksec/checksec"
+    dest: /usr/local/bin/checksec
+    remote_src: yes
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
+    mode: '0777'
+  become: yes
