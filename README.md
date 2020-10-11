@@ -1,7 +1,7 @@
 # minicamp env
 - ansibleを用いて環境構築
 - RDP前提(バイナリエディタ: ghexを使うため)
-- 手元からremote serverに対し適用する想定
+- 手元からremote server(OS: Ubuntu-20.04)に対し適用する想定
 ```
 ansible-playbook -i inventory playbook.yml
 # リモートサーバ ここではminicamp-hiroshimaに対して動かす
