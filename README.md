@@ -2,6 +2,7 @@
 - ansibleを用いて環境構築
 - RDP前提(バイナリエディタ: ghexを使うため)
 - 手元からremote server(OS: Ubuntu-20.04)に対し適用する想定
+- 配布ファイルは https://github.com/uta8a/minicamp-file からとってくる(playbook.ymlに記述済み)
 ```
 ansible-playbook -i inventory playbook.yml
 # リモートサーバ ここではminicamp-hiroshimaに対して動かす
@@ -13,6 +14,7 @@ ansible-playbook -i inventory playbook.yml
 ├── playbook.yml # Userはここのvarsで指定
 └── tasks
     ├── checksec.yml
+    ├── gdb.yml
     └── rp.yml
 ```
 - インストールするもの一覧
