@@ -1,0 +1,16 @@
+- name: peda
+  git:
+    repo: https://github.com/longld/peda.git
+    dest: ~/peda
+- name: Pwngdb
+  git:
+    repo: https://github.com/scwuaptx/Pwngdb.git
+    dest: ~/Pwngdb
+- name: cp init
+  copy:
+    src: "/home/{{ main_user }}/Pwngdb/.gdbinit"
+    dest: "/home/{{ main_user }}/.gdbinit"
+    remote_src: yes
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
+    mode: '0777'

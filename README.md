@@ -40,4 +40,7 @@ ansible-playbook -i inventory playbook.yml
 - rp++
 - Rust
 - VSCode
+- socat
+- pwntools (pip3)
+- gdb-peda
 ```

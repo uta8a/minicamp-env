@@ -1,6 +1,6 @@
 - hosts: vm
   vars:
-    main_user: "vagrant"
+    main_user: "vagrant" # change this
   tasks:
     - name: update and upgrade
       apt:
@@ -29,11 +29,21 @@
         - ghex
         - radare2
         - docker.io
+        - socat
       become: yes
+    - name: minicamp files
+      git:
+        repo: https://github.com/uta8a/minicamp-file
+        dest: ~/minicamp-files
+    - name: pwntools
+      pip:
+        name: pwntools
     - name: checksec
       include_tasks: tasks/checksec.yml
     - name: rp++
       include_tasks: tasks/rp.yml
+    - name: gdb
+      include_tasks: tasks/gdb.yml
     - name: Rust
       shell: 
         cmd: curl -sSf https://sh.rustup.rs | sh -s -- -y
